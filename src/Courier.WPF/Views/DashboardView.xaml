@@ -1,0 +1,113 @@
+<UserControl x:Class="Courier.WPF.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+
+            <!-- KPI -->
+            <UniformGrid Columns="5" Margin="0,0,0,14">
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,10,0" Padding="16">
+                    <StackPanel>
+                        <TextBlock Text="Заказы сегодня" Style="{StaticResource KpiLabel}"/>
+                        <TextBlock x:Name="TodayText" Text="0" Style="{StaticResource KpiValue}"/>
+                        <TextBlock Text="создано за текущий день" Style="{StaticResource MutedText}"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,10,0" Padding="16">
+                    <StackPanel>
+                        <TextBlock Text="В работе" Style="{StaticResource KpiLabel}"/>
+                        <TextBlock x:Name="InWorkText" Text="0" Style="{StaticResource KpiValue}"
+                                   Foreground="{StaticResource AccentBrush}"/>
+                        <TextBlock Text="принят, назначен, в пути" Style="{StaticResource MutedText}"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,10,0" Padding="16">
+                    <StackPanel>
+                        <TextBlock Text="Доставлено за месяц" Style="{StaticResource KpiLabel}"/>
+                        <TextBlock x:Name="DeliveredText" Text="0" Style="{StaticResource KpiValue}"
+                                   Foreground="{StaticResource SuccessBrush}"/>
+                        <TextBlock Text="завершённые заказы" Style="{StaticResource MutedText}"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,10,0" Padding="16">
+                    <StackPanel>
+                        <TextBlock Text="Свободные курьеры" Style="{StaticResource KpiLabel}"/>
+                        <TextBlock x:Name="FreeCouriersText" Text="0" Style="{StaticResource KpiValue}"/>
+                        <TextBlock Text="готовы к назначению" Style="{StaticResource MutedText}"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource CardBorder}" Padding="16">
+                    <StackPanel>
+                        <TextBlock Text="Выручка за месяц" Style="{StaticResource KpiLabel}"/>
+                        <TextBlock x:Name="RevenueText" Text="0 ₽" Style="{StaticResource KpiValue}"
+                                   Foreground="{StaticResource PrimaryBrush}" FontSize="23"/>
+                        <TextBlock Text="без отменённых заказов" Style="{StaticResource MutedText}"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!-- Быстрые действия -->
+            <Border Style="{StaticResource CardBorder}" Margin="0,0,0,14" Padding="14,12">
+                <DockPanel>
+                    <TextBlock Text="Быстрые действия" Style="{StaticResource SectionTitle}"
+                               VerticalAlignment="Center" Margin="0"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="+  Новый заказ" Style="{StaticResource PrimaryButton}"
+                                Click="NewOrder_Click"/>
+                        <Button Content="Новый клиент" Style="{StaticResource SecondaryButton}"
+                                Click="NewClient_Click"/>
+                        <Button Content="Открыть отчёты" Style="{StaticResource SecondaryButton}"
+                                Click="Reports_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Таблицы -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource CardBorder}" Padding="16">
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                            <TextBlock Text="Последние заказы" Style="{StaticResource SectionTitle}"
+                                       Margin="0"/>
+                            <Button Content="Все заказы →" Style="{StaticResource LinkButton}"
+                                    HorizontalAlignment="Right" Click="AllOrders_Click"/>
+                        </DockPanel>
+                        <DataGrid x:Name="RecentGrid" Height="300" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Номер" Binding="{Binding nomer}" Width="150"/>
+                                <DataGridTextColumn Header="Клиент" Binding="{Binding klient}" Width="*"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding status}" Width="120"/>
+                                <DataGridTextColumn Header="Курьер" Binding="{Binding kurier}" Width="170"/>
+                                <DataGridTextColumn Header="Сумма" Binding="{Binding cena, StringFormat={}{0:N2} ₽}"
+                                                    Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource CardBorder}" Padding="16">
+                    <DockPanel>
+                        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,10">
+                            <TextBlock Text="Курьеры" Style="{StaticResource SectionTitle}" Margin="0"/>
+                            <Button Content="Все →" Style="{StaticResource LinkButton}"
+                                    HorizontalAlignment="Right" Click="AllCouriers_Click"/>
+                        </DockPanel>
+                        <DataGrid x:Name="CouriersGrid" Height="300" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Курьер" Binding="{Binding fio}" Width="*"/>
+                                <DataGridTextColumn Header="Транспорт" Binding="{Binding transport}" Width="100"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding status}" Width="90"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

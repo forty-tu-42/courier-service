@@ -1,0 +1,86 @@
+<Window x:Class="Courier.WPF.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="О программе" Height="620" Width="720"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{StaticResource BgBrush}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource CardBorder}" Padding="24">
+            <StackPanel Orientation="Horizontal">
+                <Border Width="64" Height="64" CornerRadius="16" Background="{StaticResource PrimaryBrush}">
+                    <TextBlock Text="КС" Foreground="White" FontSize="22" FontWeight="Bold"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <StackPanel Margin="18,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="ИС «Курьерская служба»" FontSize="22" FontWeight="Bold"/>
+                    <TextBlock Text="Информационно-справочная система учёта заказов и доставок"
+                               Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+                    <TextBlock Text="Версия 1.0 · 2026" Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" Margin="0,14,0,0" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Border Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Назначение" Style="{StaticResource SectionTitle}"/>
+                        <TextBlock Text="Система автоматизирует работу курьерской службы: ведёт базу клиентов, заказов и курьеров, рассчитывает стоимость доставки по зонам и весу, назначает курьеров, отслеживает статусы и формирует отчёты."
+                                   FontSize="12.5" LineHeight="21" Foreground="{StaticResource MutedBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardBorder}" Margin="0,12,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Технологии" Style="{StaticResource SectionTitle}"/>
+                        <TextBlock Text="WPF (C#, .NET 9) · MS SQL Server · ADO.NET (Microsoft.Data.SqlClient) · ASP.NET Core Web API · JWT · Swagger · xUnit"
+                                   FontSize="12.5" LineHeight="21" Foreground="{StaticResource MutedBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardBorder}" Margin="0,12,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Учётные записи" Style="{StaticResource SectionTitle}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="180"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                                <RowDefinition Height="26"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="admin / admin123" FontFamily="Consolas" FontSize="12"/>
+                            <TextBlock Grid.Column="1" Text="Администратор — полный доступ" FontSize="12"
+                                       Foreground="{StaticResource MutedBrush}"/>
+                            <TextBlock Grid.Row="1" Text="manager / manager123" FontFamily="Consolas" FontSize="12"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="Менеджер — заказы, клиенты, отчёты"
+                                       FontSize="12" Foreground="{StaticResource MutedBrush}"/>
+                            <TextBlock Grid.Row="2" Text="courier / courier123" FontFamily="Consolas" FontSize="12"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="Курьер — только свои заказы"
+                                       FontSize="12" Foreground="{StaticResource MutedBrush}"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardBorder}" Margin="0,12,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Горячие клавиши" Style="{StaticResource SectionTitle}"/>
+                        <TextBlock Text="F1 — справка · Ctrl+F — поиск · Enter — применить фильтр · Esc — закрыть окно"
+                                   FontSize="12.5" Foreground="{StaticResource MutedBrush}"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Grid.Row="2" Content="Закрыть" Style="{StaticResource PrimaryButton}" Width="130"
+                HorizontalAlignment="Right" Margin="0,14,0,0" IsCancel="True" Click="Close_Click"/>
+    </Grid>
+</Window>
